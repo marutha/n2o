@@ -74,7 +74,7 @@
 %%% FRAMEWORK %%%
 
 %%% Elements %%%
--define(ELEMENT_BASE(Module), is_element=is_element, module=Module, id, anchor, actions, show_if=true, class="", style="").
+-define(ELEMENT_BASE(Module), is_element=is_element, module=Module, id, anchor, actions, show_if=true, class="", style="", source=[]).
 -record(elementbase, {?ELEMENT_BASE(undefined)}).
 -record(template, {?ELEMENT_BASE(element_template), file, bindings=[] }).
 -record(function_el, {?ELEMENT_BASE(element_function), function=fun() -> [] end}).
@@ -194,7 +194,7 @@
 
 
 %%% Actions %%%
--define(AV_BASE(Module,Type), is_action=Type, module=Module, anchor, trigger, target, actions, show_if=true).
+-define(AV_BASE(Module,Type), is_action=Type, module=Module, anchor, trigger, target, actions, show_if=true, source=[]).
 
 -define(ACTION_BASE(Module), ?AV_BASE(Module,is_action)).
 
@@ -206,7 +206,7 @@
 -record(api, {?ACTION_BASE(action_api), name, tag, delegate }).
 -record(function, {?ACTION_BASE(action_function), function }).
 -record(set, {?ACTION_BASE(action_set), value}).
--record(redirect, {?ACTION_BASE(action_redirect), url}).
+-record(redirect, {?ACTION_BASE(action_redirect), url, nodrop=false}).
 -record(event, {?ACTION_BASE(action_event), type=default, keycode=undefined, shift_key=false, delay=0, postback, validation_group, delegate, extra_param}).
 %% we want validation assignments to happen last, so we use AV_BASE and set deferral to zero first
 -record(validate, {?ACTION_BASE(action_validate), on=submit, success_text=" ", group, validators, attach_to }).
